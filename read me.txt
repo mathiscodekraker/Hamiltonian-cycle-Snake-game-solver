@@ -1,0 +1,8 @@
+the website the program is used on 
+https://playsnake.org/
+
+files 
+- open website and start game
+- controlls 
+- image recognition
+- algorithm for winning the game that controlls all of the other files
