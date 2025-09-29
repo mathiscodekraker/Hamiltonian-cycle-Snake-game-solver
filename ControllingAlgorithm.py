@@ -13,6 +13,7 @@ VerticalSubList = [[1, 1], [4, 19], [1, 1], [2, 19]]
 
 #move set after reaching specific point 0=nothing/stay on course 1 = up, 2 = right, 3 = down, 4 = left
 StartMoveSet = []
+StartDirection = -1
 
 #follow the paths one at a time 2A then 2B
 #start in the right in the bottom
@@ -42,20 +43,31 @@ def Move(InputValue):
 
 def ExecuteMoveSet(Inputs):
     Move(Inputs[0])
-    # wacht voor zoveel blokjes bewogen Inputs[1]
+    IR.MoveSetCompletion(Inputs[1], Inputs[0])
     pass
 
 def ExecuteEachMove(InputsList):
-    for each in InputsList:
+    global StartDirection
+    for index, each in enumerate(InputsList):
+        I = index
+        while InputList[I][1] == 0 and not (I < 0):
+            I -= 1
+            pass
+        if I < 0:
+            each[1] = StartDirection
+        else:
+            each[1] = InputList[I][1]
+            pass
         ExecuteMoveSet(each)
         pass
 
 #Execution
 def ChooseWhatVersionToExecute():
-    global StartMoveSet
+    global StartMoveSet, StartDirection
     ChooseInput = input("what version do you execute: ")
     if ChooseInput in FromStart:
         StartMoveSet = [[0, 11], [2, 10]]
+        StartDirection = 3
         pass
     pass
 
