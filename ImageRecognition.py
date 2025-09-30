@@ -1,10 +1,13 @@
+#screenshot devide image into grid 
+#- from PIL import Image https://codingfleet.com/transformation-details/splitting-an-image-into-a-grid-using-python/
+
 #library
 import OpenWebsiteAndStartGame as OWASG
 from OpenWebsiteAndStartGame import GameScreenSize
 from PIL import ImageGrab
 
-#screenshot devide image into grid 
-#- from PIL import Image https://codingfleet.com/transformation-details/splitting-an-image-into-a-grid-using-python/
+#variables
+XAndYBlocks = [21, 15]
 
 def SnakeMoved(img):
     return
