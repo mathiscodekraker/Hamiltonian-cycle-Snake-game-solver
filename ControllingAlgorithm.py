@@ -2,6 +2,7 @@
 import Controlls as C
 import ImageRecognition as IR
 import OpenWebsiteAndStartGame as OWASG
+from PIL.ImageCms import Direction
 
 #variables
 #Constant Variables
@@ -44,22 +45,17 @@ def Move(InputValue):
 
 def ExecuteMoveSet(Inputs):
     global Position
-    Move(Inputs[0])
+    if Inputs[0] != 0:
+        Move(Inputs[0])
+    else:
+        Inputs[0]  = StartDirection
+        pass
     Position = IR.MoveSetCompletion(Inputs[1], Inputs[0], Position)
     pass
 
 def ExecuteEachMove(InputsList):
     global StartDirection
     for index, each in enumerate(InputsList):
-        I = index
-        while InputsList[I][1] == 0 and not (I < 0):
-            I -= 1
-            pass
-        if I < 0:
-            each[1] = StartDirection
-        else:
-            each[1] = InputsList[I][1]
-            pass
         ExecuteMoveSet(each)
         pass
     pass
