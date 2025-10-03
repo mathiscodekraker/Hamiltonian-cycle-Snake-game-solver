@@ -14,6 +14,7 @@ VerticalSubList = [[1, 1], [4, 19], [1, 1], [2, 19]]
 #move set after reaching specific point 0=nothing/stay on course 1 = up, 2 = right, 3 = down, 4 = left
 StartMoveSet = []
 StartDirection = -1
+Position = []
 
 #follow the paths one at a time 2A then 2B
 #start in the right in the bottom
@@ -42,37 +43,48 @@ def Move(InputValue):
     pass
 
 def ExecuteMoveSet(Inputs):
+    global Position
     Move(Inputs[0])
-    IR.MoveSetCompletion(Inputs[1], Inputs[0])
+    Position = IR.MoveSetCompletion(Inputs[1], Inputs[0], Position)
     pass
 
 def ExecuteEachMove(InputsList):
     global StartDirection
     for index, each in enumerate(InputsList):
         I = index
-        while InputList[I][1] == 0 and not (I < 0):
+        while InputsList[I][1] == 0 and not (I < 0):
             I -= 1
             pass
         if I < 0:
             each[1] = StartDirection
         else:
-            each[1] = InputList[I][1]
+            each[1] = InputsList[I][1]
             pass
         ExecuteMoveSet(each)
         pass
+    pass
 
 #Execution
 def ChooseWhatVersionToExecute():
-    global StartMoveSet, StartDirection
+    global StartMoveSet, StartDirection, StartPosition
     ChooseInput = input("what version do you execute: ")
     if ChooseInput in FromStart:
         StartMoveSet = [[0, 11], [2, 10]]
         StartDirection = 3
+        StartPosition = [11, 4]
+
+        print("1. slug")
+        print("2. worm")
+        print("3. python")
+        VersionOfTheGame = input("which of the games do you want the program to play enter the number: ")
+        OWASG.StartGame(int(VersionOfTheGame))
         pass
     pass
 
 while True:
+    #here could be a function that opens the game
     ChooseWhatVersionToExecute()
+    Position = StartPosition
     ExecuteEachMove(StartMoveSet)
     MoveSet1 = True
     while True:

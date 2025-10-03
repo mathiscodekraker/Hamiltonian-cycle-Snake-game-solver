@@ -1,4 +1,6 @@
 #library
+import time
+import pyautogui
 
 #variables
 #constant variables
@@ -8,5 +10,16 @@
 GameScreenSize = [590, 289, 589, 260]
 #snake block size
 BlockSize = [32, 32] #[31, 33]
+#choose Game Buttons Positions
+ChooseGameButtonsPositions = [[733, 695], [927, 695], [1147, 695]]
 
 #functions
+def StartGame(VersionOfTheGame):
+    #choose game
+    WhereToClick = ChooseGameButtonsPositions[(VersionOfTheGame - 1)]
+    pyautogui.moveTo(WhereToClick[0], WhereToClick[1])
+    pyautogui.click()
+    pyautogui.moveTo(0, WhereToClick[1])
+
+    time.sleep(2)
+    pass
